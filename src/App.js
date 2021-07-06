@@ -1,15 +1,18 @@
 import React from "react";
 import Register from "./pages/Register/register.component";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
-    <div className="App">
-      <Helmet>
-        <style>{'body { background-color: #3F51B5; }'}</style>
-      </Helmet>
-      <Register />
-    </div>
+    <HelmetProvider>
+      <div className="App">
+        <Helmet>
+          <style>{'body { background-color: #3F51B5; }'}</style>
+        </Helmet>
+        <Register />
+      </div>
+    </HelmetProvider>
+
   );
 }
 
