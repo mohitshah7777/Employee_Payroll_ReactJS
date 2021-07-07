@@ -1,15 +1,12 @@
 import React from 'react';
-import { Grid, Paper, Button, Typography,Link } from '@material-ui/core';
+import { Grid, Paper, Button, Typography, Link } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-export default class Register extends React.Component {
+export default class Login extends React.Component {
     state = {
         formData: {
-            firstName: '',
-            lastName: '',
             email: '',
-            password: '',
-            confirmPassword: '',
+            password: ''
         },
         submitted: false,
     }
@@ -27,14 +24,13 @@ export default class Register extends React.Component {
     }
 
     render() {
-        const paperStyle = { padding: '10px 30px', width: 260, height: 'auto', margin: "0px auto" }
+        const paperStyle = { padding: '10px 30px', width: 260, height: '78vh', margin: "0px auto" }
         const hStyle = { margin: '5px' ,color: '#3F51B5' }
         const btnstyle = { margin: '15px 65px', width: 125 }
-        const textStyle = { margin: '5px 0' }
-        const signUpStyle = { margin: '5px 5px' }
-
+        const textStyle = { margin: '5px 0px' }
+        const signInStyle = { margin: '0px 5px' }
+        const forgotStyle = { margin: '0px 60px' }
         const { formData, submitted } = this.state
-        // const onSubmit = (formData) => console.log(formData)
         console.log(formData)
 
         return (
@@ -42,35 +38,9 @@ export default class Register extends React.Component {
                 <Paper  style={paperStyle}>
                     <Grid align='center'>
                         <h3 style={hStyle}>EMPLOYEE PAYROLL APP</h3>
-                        <h3>Register</h3>
+                        <h3>Login</h3>
                     </Grid>
                     <ValidatorForm useref='form' onSubmit={this.handleSubmit}>
-                        <TextValidator
-                            name='firstName'
-                            onChange={this.handleChange}
-                            style={textStyle}
-                            value={formData.firstName}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
-                            size='small'
-                            label='First name'
-                            placeholder='Enter first name'
-                            variant='outlined'
-                            fullWidth
-                        />
-                        <TextValidator
-                            name='lastName'
-                            style={textStyle}
-                            size='small'
-                            label='Last name'
-                            placeholder='Enter last name'
-                            variant='outlined'
-                            fullWidth
-                            onChange={this.handleChange}
-                            value={formData.lastName}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
-                        />
                         <TextValidator
                             style={textStyle}
                             size='small'
@@ -98,33 +68,23 @@ export default class Register extends React.Component {
                             validators={['required']}
                             errorMessages={["this field is required"]}
                         />
-                        <TextValidator
-                            style={textStyle}
-                            size='small'
-                            label='Confirm password'
-                            placeholder='Enter password again'
-                            type='password'
-                            variant='outlined'
-                            name='confirmPassword'
-                            fullWidth
-                            onChange={this.handleChange}
-                            value={formData.confirmPassword}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
-                        />
-                        <Button
+                       <Button
                             type='submit'
                             color='primary'
                             variant="contained"
                             style={btnstyle}
                             fullWidth
                             disabled={submitted}>{
-                                (submitted && 'Registered!') || (!submitted && 'Sign up')
+                                (submitted && 'Logged In!') || (!submitted && 'Sign In')
                             }</Button>
-                            
-                <Typography style={signUpStyle}> Already have an account?
+                            <Typography style={forgotStyle}>
                      <Link href="#" >
-                        Sign In 
+                        Forgot password?
+                </Link>
+                </Typography>
+                <Typography style={signInStyle}> Do you have an account? 
+                     <Link href="#" >
+                        Sign Up 
                 </Link>
                 </Typography>
                     </ValidatorForm>

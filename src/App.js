@@ -1,6 +1,6 @@
 import React from "react";
-import Register from "./pages/Register/register.component";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import SignInOutContainer from "./pages/container";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <Helmet>
           <style>{'body { background-color: #3F51B5; }'}</style>
         </Helmet>
-        <Register />
+        <SignInOutContainer />
       </div>
     </HelmetProvider>
 
