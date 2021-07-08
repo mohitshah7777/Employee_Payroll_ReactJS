@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid, Paper, Button, Typography, Link } from '@material-ui/core';
+import { Grid, Paper, Button, Typography} from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { Link } from 'react-router-dom';
 
 export default class Login extends React.Component {
     state = {
@@ -24,18 +25,18 @@ export default class Login extends React.Component {
     }
 
     render() {
-        const paperStyle = { padding: '10px 30px', width: 260, height: '78vh', margin: "0px auto" }
-        const hStyle = { margin: '5px' ,color: '#3F51B5' }
+        const paperStyle = { padding: '20px 30px', width: 260, height: '78vh', margin: "40px auto" }
+        const hStyle = { margin: '5px', color: '#3F51B5' }
         const btnstyle = { margin: '15px 65px', width: 125 }
         const textStyle = { margin: '5px 0px' }
-        const signInStyle = { margin: '0px 5px' }
-        const forgotStyle = { margin: '0px 60px' }
+        const signInStyle = { margin: '5px 5px' }
+        const forgotStyle = { margin: '5px 60px' }
         const { formData, submitted } = this.state
         console.log(formData)
 
         return (
             <Grid>
-                <Paper  style={paperStyle}>
+                <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
                         <h3 style={hStyle}>EMPLOYEE PAYROLL APP</h3>
                         <h3>Login</h3>
@@ -68,7 +69,7 @@ export default class Login extends React.Component {
                             validators={['required']}
                             errorMessages={["this field is required"]}
                         />
-                       <Button
+                        <Button
                             type='submit'
                             color='primary'
                             variant="contained"
@@ -77,16 +78,16 @@ export default class Login extends React.Component {
                             disabled={submitted}>{
                                 (submitted && 'Logged In!') || (!submitted && 'Sign In')
                             }</Button>
-                            <Typography style={forgotStyle}>
-                     <Link href="#" >
-                        Forgot password?
-                </Link>
-                </Typography>
-                <Typography style={signInStyle}> Do you have an account? 
-                     <Link href="#" >
-                        Sign Up 
-                </Link>
-                </Typography>
+                        <Typography style={forgotStyle}>
+                            <Link href="#" >
+                                Forgot password?
+                            </Link>
+                        </Typography>
+                        <Typography style={signInStyle}> Do you have an account?
+                            <Link to={'/register'}>
+                                Sign Up
+                            </Link>
+                        </Typography>
                     </ValidatorForm>
                 </Paper>
             </Grid>

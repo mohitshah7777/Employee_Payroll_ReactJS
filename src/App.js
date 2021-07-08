@@ -1,18 +1,18 @@
 import React from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import SignInOutContainer from "./pages/container";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
-    <HelmetProvider>
-      <div className="App">
-        <Helmet>
-          <style>{'body { background-color: #3F51B5; }'}</style>
-        </Helmet>
-        <SignInOutContainer />
-      </div>
-    </HelmetProvider>
-
+    <div className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 

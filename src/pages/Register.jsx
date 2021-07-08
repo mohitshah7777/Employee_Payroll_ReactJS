@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid, Paper, Button, Typography,Link } from '@material-ui/core';
+import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { Link } from 'react-router-dom';
 
 export default class Register extends React.Component {
     state = {
@@ -27,8 +28,8 @@ export default class Register extends React.Component {
     }
 
     render() {
-        const paperStyle = { padding: '10px 30px', width: 260, height: 'auto', margin: "0px auto" }
-        const hStyle = { margin: '5px' ,color: '#3F51B5' }
+        const paperStyle = { padding: '20px 30px', width: 260, height: 'auto', margin: "40px auto" }
+        const hStyle = { margin: '5px', color: '#3F51B5' }
         const btnstyle = { margin: '15px 65px', width: 125 }
         const textStyle = { margin: '5px 0' }
         const signUpStyle = { margin: '5px 5px' }
@@ -39,7 +40,7 @@ export default class Register extends React.Component {
 
         return (
             <Grid>
-                <Paper  style={paperStyle}>
+                <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
                         <h3 style={hStyle}>EMPLOYEE PAYROLL APP</h3>
                         <h3>Register</h3>
@@ -121,12 +122,12 @@ export default class Register extends React.Component {
                             disabled={submitted}>{
                                 (submitted && 'Registered!') || (!submitted && 'Sign up')
                             }</Button>
-                            
-                <Typography style={signUpStyle}> Already have an account?
-                     <Link href="#" >
-                        Sign In 
-                </Link>
-                </Typography>
+
+                        <Typography style={signUpStyle}> Already have an account?
+                            <Link to={'/login'}>
+                                Sign In
+                            </Link>
+                        </Typography>
                     </ValidatorForm>
                 </Paper>
             </Grid>
