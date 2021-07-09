@@ -1,7 +1,8 @@
 import React from 'react';
-import { Grid, Paper, Button, Typography} from '@material-ui/core';
+import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
+import Api from './Api';
 
 export default class Login extends React.Component {
     state = {
@@ -19,6 +20,21 @@ export default class Login extends React.Component {
     }
 
     handleSubmit = () => {
+        const user = {
+            email: this.state.formData.email,
+            password: this.state.formData.password,
+        };
+        console.log(user);
+
+        Api.post(`login`, user)
+            .then(res => {
+                console.log(res);
+                window.alert(res.data.message);
+                console.log(res.data);
+            }).catch(error => {
+                window.alert(error)
+            })
+
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
         });
@@ -30,7 +46,7 @@ export default class Login extends React.Component {
         const btnstyle = { margin: '15px 65px', width: 125 }
         const textStyle = { margin: '5px 0px' }
         const signInStyle = { margin: '15px 5px' }
-        const forgotStyle = { margin: '0px 0px', fontSize: '14px'}
+        const forgotStyle = { margin: '0px 0px', fontSize: '14px' }
         const { formData, submitted } = this.state
         console.log(formData)
 
@@ -70,10 +86,10 @@ export default class Login extends React.Component {
                             errorMessages={["this field is required"]}
                         />
                         <Typography style={forgotStyle}>
-                        <Link style={{ color: '#1A73E8', textDecoration: 'inherit'}} href="#" >
-                            Forgot password?
-                        </Link>
-                    </Typography>
+                            <Link style={{ color: '#1A73E8', textDecoration: 'inherit' }} href="#" >
+                                Forgot password?
+                            </Link>
+                        </Typography>
                         <Button
                             type='submit'
                             color='primary'
@@ -84,7 +100,7 @@ export default class Login extends React.Component {
                                 (submitted && 'Logged In!') || (!submitted && 'Sign In')
                             }</Button>
                         <Typography style={signInStyle}> Do you have an account?
-                            <Link style={{ color: '#1A73E8', textDecoration: 'inherit'}} to={'/register'}>
+                            <Link to={'/register'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                 Sign Up
                             </Link>
                         </Typography>
