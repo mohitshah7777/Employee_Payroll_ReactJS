@@ -25,12 +25,12 @@ export default class Login extends React.Component {
     }
 
     render() {
-        const paperStyle = { padding: '20px 30px', width: 260, height: '78vh', margin: "40px auto" }
+        const paperStyle = { padding: '20px 30px', width: 260, height: 440, margin: "40px auto" }
         const hStyle = { margin: '5px', color: '#3F51B5' }
         const btnstyle = { margin: '15px 65px', width: 125 }
         const textStyle = { margin: '5px 0px' }
-        const signInStyle = { margin: '5px 5px' }
-        const forgotStyle = { margin: '5px 60px' }
+        const signInStyle = { margin: '15px 5px' }
+        const forgotStyle = { margin: '0px 0px', fontSize: '14px'}
         const { formData, submitted } = this.state
         console.log(formData)
 
@@ -69,6 +69,11 @@ export default class Login extends React.Component {
                             validators={['required']}
                             errorMessages={["this field is required"]}
                         />
+                        <Typography style={forgotStyle}>
+                        <Link style={{ color: '#1A73E8', textDecoration: 'inherit'}} href="#" >
+                            Forgot password?
+                        </Link>
+                    </Typography>
                         <Button
                             type='submit'
                             color='primary'
@@ -78,13 +83,8 @@ export default class Login extends React.Component {
                             disabled={submitted}>{
                                 (submitted && 'Logged In!') || (!submitted && 'Sign In')
                             }</Button>
-                        <Typography style={forgotStyle}>
-                            <Link href="#" >
-                                Forgot password?
-                            </Link>
-                        </Typography>
                         <Typography style={signInStyle}> Do you have an account?
-                            <Link to={'/register'}>
+                            <Link style={{ color: '#1A73E8', textDecoration: 'inherit'}} to={'/register'}>
                                 Sign Up
                             </Link>
                         </Typography>

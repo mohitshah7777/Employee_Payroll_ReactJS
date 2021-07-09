@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
+import Api from './Api';
 
 export default class Register extends React.Component {
     state = {
@@ -15,17 +16,54 @@ export default class Register extends React.Component {
         submitted: false,
     }
 
+    componentDidMount() {
+        // custom rule will have name 'isPasswordMatch'
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+            if (value !== this.state.formData.password) {
+                return false;
+            }
+            return true;
+        });
+    }
+
+    componentWillUnmount() {
+        ValidatorForm.removeValidationRule('isPasswordMatch')
+    }
+
     handleChange = (event) => {
         const { formData } = this.state;
         formData[event.target.name] = event.target.value;
+        if (event.target.name === 'password') {
+            this.form.isFormValid(false);
+        }
         this.setState({ formData });
     }
 
-    handleSubmit = () => {
+    handleSubmit = event => {
+        event.preventDefault();
+        const user = {
+            firstName: this.state.formData.firstName,
+            lastName: this.state.formData.lastName,
+            email: this.state.formData.email,
+            password: this.state.formData.password,
+            confirmPassword: this.state.formData.confirmPassword
+        };
+        console.log(user);
+
+        Api.post(`register`, user)
+            .then(res => {
+                console.log(res);
+                window.alert(res.data.message);
+                console.log(res.data);
+            }).catch(error => {
+                window.alert(error)
+            })
+
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
-        });
+        })
     }
+
 
     render() {
         const paperStyle = { padding: '20px 30px', width: 260, height: 'auto', margin: "40px auto" }
@@ -35,7 +73,6 @@ export default class Register extends React.Component {
         const signUpStyle = { margin: '5px 5px' }
 
         const { formData, submitted } = this.state
-        // const onSubmit = (formData) => console.log(formData)
         console.log(formData)
 
         return (
@@ -45,14 +82,14 @@ export default class Register extends React.Component {
                         <h3 style={hStyle}>EMPLOYEE PAYROLL APP</h3>
                         <h3>Register</h3>
                     </Grid>
-                    <ValidatorForm useref='form' onSubmit={this.handleSubmit}>
+                    <ValidatorForm ref={r => (this.form = r)} onSubmit={this.handleSubmit}>
                         <TextValidator
                             name='firstName'
                             onChange={this.handleChange}
                             style={textStyle}
                             value={formData.firstName}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
+                            validators={['required', 'matchRegexp:^[a-zA-Z]{2,}']}
+                            errorMessages={["this field is required", "Minimum 2 characters"]}
                             size='small'
                             label='First name'
                             placeholder='Enter first name'
@@ -69,8 +106,8 @@ export default class Register extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                             value={formData.lastName}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
+                            validators={['required', 'matchRegexp:^[a-zA-Z]{2,}']}
+                            errorMessages={["this field is required", "Minimum 2 characters"]}
                         />
                         <TextValidator
                             style={textStyle}
@@ -83,7 +120,7 @@ export default class Register extends React.Component {
                             onChange={this.handleChange}
                             value={formData.email}
                             validators={['required', 'isEmail']}
-                            errorMessages={["this field is required", "Email is not valid"]}
+                            errorMessages={["this field is required", "Email is not valid",]}
                         />
                         <TextValidator
                             style={textStyle}
@@ -96,8 +133,8 @@ export default class Register extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                             value={formData.password}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
+                            validators={['required', 'matchRegexp:^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$']}
+                            errorMessages={["this field is required", "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character, 8 characters"]}
                         />
                         <TextValidator
                             style={textStyle}
@@ -110,8 +147,8 @@ export default class Register extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                             value={formData.confirmPassword}
-                            validators={['required']}
-                            errorMessages={["this field is required"]}
+                            validators={['isPasswordMatch', 'required']}
+                            errorMessages={['password mismatch', 'this field is required']}
                         />
                         <Button
                             type='submit'
@@ -124,7 +161,7 @@ export default class Register extends React.Component {
                             }</Button>
 
                         <Typography style={signUpStyle}> Already have an account?
-                            <Link to={'/login'}>
+                            <Link to={'/login'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                 Sign In
                             </Link>
                         </Typography>
