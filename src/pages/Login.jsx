@@ -32,12 +32,19 @@ export default class Login extends React.Component {
                 window.alert(res.data.message);
                 console.log(res.data);
             }).catch(error => {
-                window.alert(error)
+                window.alert(error.message)
             })
 
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
         });
+
+        this.setState({
+            formData: {
+                email: '',
+                password: ''
+            }
+        })
     }
 
     render() {

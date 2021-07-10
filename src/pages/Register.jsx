@@ -62,8 +62,17 @@ export default class Register extends React.Component {
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
         })
-    }
 
+        this.setState({
+            formData: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            }
+        })
+    }
 
     render() {
         const paperStyle = { padding: '20px 30px', width: 260, height: 'auto', margin: "40px auto" }
