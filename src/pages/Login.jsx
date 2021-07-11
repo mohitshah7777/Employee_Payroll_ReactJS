@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
-import Api from './Api';
+import {loginAxios} from '../services/user'
 
 export default class Login extends React.Component {
     state = {
@@ -26,14 +26,7 @@ export default class Login extends React.Component {
         };
         console.log(user);
 
-        Api.post(`login`, user)
-            .then(res => {
-                console.log(res);
-                window.alert(res.data.message);
-                console.log(res.data);
-            }).catch(error => {
-                window.alert(error.message)
-            })
+        loginAxios(user);
 
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);

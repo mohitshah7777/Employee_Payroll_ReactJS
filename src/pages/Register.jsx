@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
-import Api from './Api';
+import { registerAxios } from '../services/user'
 
 export default class Register extends React.Component {
     state = {
@@ -50,14 +50,7 @@ export default class Register extends React.Component {
         };
         console.log(user);
 
-        Api.post(`register`, user)
-            .then(res => {
-                console.log(res);
-                window.alert(res.data.message);
-                console.log(res.data);
-            }).catch(error => {
-                window.alert(error)
-            })
+        registerAxios(user);
 
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
