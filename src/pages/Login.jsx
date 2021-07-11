@@ -86,7 +86,7 @@ export default class Login extends React.Component {
                             errorMessages={["this field is required"]}
                         />
                         <Typography style={forgotStyle}>
-                            <Link style={{ color: '#1A73E8', textDecoration: 'inherit' }} href="#" >
+                            <Link to={''} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                 Forgot password?
                             </Link>
                         </Typography>

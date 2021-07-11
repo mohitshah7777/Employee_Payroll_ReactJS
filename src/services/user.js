@@ -5,6 +5,7 @@ export const loginAxios = (loginData) => {
     Axios.post('/login', loginData)
         .then((res) => {
             alert(res.data.message)
+            localStorage.setItem('token', res.data.token)
         }).catch((error) => {
             alert(error)
         })

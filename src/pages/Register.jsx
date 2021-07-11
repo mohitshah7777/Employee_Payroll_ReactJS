@@ -163,7 +163,7 @@ export default class Register extends React.Component {
                             }</Button>
 
                         <Typography style={signUpStyle}> Already have an account?
-                            <Link to={'/login'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                            <Link to={'/'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                 Sign In
                             </Link>
                         </Typography>
