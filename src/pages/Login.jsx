@@ -32,7 +32,7 @@ export default class Login extends React.Component {
                 alert(res.data.message)
                 localStorage.setItem('token', res.data.token)
             }).catch((error) => {
-                alert(error.message)
+                alert("Invalid Credentials")
             })
 
         this.setState({ submitted: true }, () => {
@@ -61,7 +61,7 @@ export default class Login extends React.Component {
             <Grid>
                 <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
-                        <h3 style={hStyle}>EMPLOYEE PAYROLL APP</h3>
+                        <h3 id="h3tag" style={hStyle}>EMPLOYEE PAYROLL APP</h3>
                         <h3>Login</h3>
                     </Grid>
                     <ValidatorForm useref='form' onSubmit={this.handleSubmit}>
