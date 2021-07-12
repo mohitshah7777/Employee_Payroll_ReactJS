@@ -2,7 +2,8 @@ import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
-import { registerAxios } from '../services/user'
+import Service from '../services/user'
+const service = new Service();
 
 export default class Register extends React.Component {
     state = {
@@ -50,7 +51,12 @@ export default class Register extends React.Component {
         };
         console.log(user);
 
-        registerAxios(user);
+        service.registerAxios(user)
+            .then((res) => {
+                alert(res.data.message)
+            }).catch((error) => {
+                alert(error)
+            })
 
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
@@ -157,6 +163,7 @@ export default class Register extends React.Component {
                             color='primary'
                             variant="contained"
                             style={btnstyle}
+                            onSubmit={this.handleSubmit}
                             fullWidth
                             disabled={submitted}>{
                                 (submitted && 'Registered!') || (!submitted && 'Sign up')

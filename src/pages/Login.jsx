@@ -2,7 +2,8 @@ import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
-import {loginAxios} from '../services/user'
+import Service from '../services/user';
+const service = new Service();
 
 export default class Login extends React.Component {
     state = {
@@ -26,7 +27,13 @@ export default class Login extends React.Component {
         };
         console.log(user);
 
-        loginAxios(user);
+        service.loginAxios(user)
+            .then((res) => {
+                alert(res.data.message)
+                localStorage.setItem('token', res.data.token)
+            }).catch((error) => {
+                alert(error.message)
+            })
 
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
@@ -95,6 +102,7 @@ export default class Login extends React.Component {
                             color='primary'
                             variant="contained"
                             style={btnstyle}
+                            onSubmit={this.handleSubmit}
                             fullWidth
                             disabled={submitted}>{
                                 (submitted && 'Logged In!') || (!submitted && 'Sign In')
