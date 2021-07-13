@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 import Service from '../services/user';
 const service = new Service();
 
@@ -64,8 +64,9 @@ export default class Login extends React.Component {
                         <h3 id="h3tag" style={hStyle}>EMPLOYEE PAYROLL APP</h3>
                         <h3>Login</h3>
                     </Grid>
-                    <ValidatorForm useref='form' onSubmit={this.handleSubmit}>
+                    <ValidatorForm data-testid="form" useref='form' onSubmit={this.handleSubmit}>
                         <TextValidator
+                            data-testid="email"
                             style={textStyle}
                             size='small'
                             label='Email'
@@ -79,6 +80,7 @@ export default class Login extends React.Component {
                             errorMessages={["this field is required", "Email is not valid"]}
                         />
                         <TextValidator
+                            data-testid="password"
                             style={textStyle}
                             size='small'
                             label='Password'
@@ -92,12 +94,14 @@ export default class Login extends React.Component {
                             validators={['required']}
                             errorMessages={["this field is required"]}
                         />
-                        <Typography style={forgotStyle}>
-                            <Link to={''} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
-                                Forgot password?
-                            </Link>
+                        <Typography data-testid="typography" style={forgotStyle}>
+                            <Router>
+                                <Link to={''} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                                    Forgot password?
+                                </Link></Router>
                         </Typography>
                         <Button
+                            data-testid="button"
                             type='submit'
                             color='primary'
                             variant="contained"
@@ -108,9 +112,10 @@ export default class Login extends React.Component {
                                 (submitted && 'Logged In!') || (!submitted && 'Sign In')
                             }</Button>
                         <Typography style={signInStyle}> Do you have an account?
-                            <Link to={'/register'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
-                                Sign Up
-                            </Link>
+                            <Router>
+                                <Link to={'/register'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                                    Sign Up
+                                </Link></Router>
                         </Typography>
                     </ValidatorForm>
                 </Paper>
