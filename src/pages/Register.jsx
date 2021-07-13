@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter as Router } from 'react-router-dom';
 import Service from '../services/user'
 const service = new Service();
 
@@ -87,11 +87,12 @@ export default class Register extends React.Component {
             <Grid>
                 <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
-                        <h3 style={hStyle}>EMPLOYEE PAYROLL APP</h3>
+                        <h3 id="h3tag" style={hStyle}>EMPLOYEE PAYROLL APP</h3>
                         <h3>Register</h3>
                     </Grid>
-                    <ValidatorForm ref={r => (this.form = r)} onSubmit={this.handleSubmit}>
+                    <ValidatorForm data-testid="form" ref={r => (this.form = r)} onSubmit={this.handleSubmit}>
                         <TextValidator
+                            data-testid="firstname"
                             name='firstName'
                             onChange={this.handleChange}
                             style={textStyle}
@@ -105,6 +106,7 @@ export default class Register extends React.Component {
                             fullWidth
                         />
                         <TextValidator
+                            data-testid="lastname"
                             name='lastName'
                             style={textStyle}
                             size='small'
@@ -118,6 +120,7 @@ export default class Register extends React.Component {
                             errorMessages={["this field is required", "Minimum 2 characters"]}
                         />
                         <TextValidator
+                            data-testid="email"
                             style={textStyle}
                             size='small'
                             label='Email'
@@ -131,6 +134,7 @@ export default class Register extends React.Component {
                             errorMessages={["this field is required", "Email is not valid",]}
                         />
                         <TextValidator
+                            data-testid="password"
                             style={textStyle}
                             size='small'
                             label='Password'
@@ -145,6 +149,7 @@ export default class Register extends React.Component {
                             errorMessages={["this field is required", "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character, 8 characters"]}
                         />
                         <TextValidator
+                            data-testid="confirmpassword"
                             style={textStyle}
                             size='small'
                             label='Confirm password'
@@ -159,6 +164,7 @@ export default class Register extends React.Component {
                             errorMessages={['password mismatch', 'this field is required']}
                         />
                         <Button
+                            data-testid="button"
                             type='submit'
                             color='primary'
                             variant="contained"
@@ -169,10 +175,12 @@ export default class Register extends React.Component {
                                 (submitted && 'Registered!') || (!submitted && 'Sign up')
                             }</Button>
 
-                        <Typography style={signUpStyle}> Already have an account?
-                            <Link to={'/'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
-                                Sign In
-                            </Link>
+                        <Typography data-testid="typography" style={signUpStyle}> Already have an account?
+                            <Router>
+                                <Link to={'/'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                                    Sign In
+                                </Link>
+                            </Router>
                         </Typography>
                     </ValidatorForm>
                 </Paper>
