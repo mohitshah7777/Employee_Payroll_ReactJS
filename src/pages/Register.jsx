@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Service from '../services/user'
 const service = new Service();
 
@@ -176,11 +176,10 @@ export default class Register extends React.Component {
                             }</Button>
 
                         <Typography data-testid="typography" style={signUpStyle}> Already have an account?
-                            <Router>
-                                <Link to={'/'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
-                                    Sign In
-                                </Link>
-                            </Router>
+
+                            <Link to={'/'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                                Sign In
+                            </Link>
                         </Typography>
                     </ValidatorForm>
                 </Paper>

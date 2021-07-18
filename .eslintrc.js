@@ -1,7 +1,8 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "amd": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -18,7 +19,9 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "no-unused-vars": ["error", { "vars": "local", "args": "none", "ignoreRestSiblings": false }]
+        "react/prop-types": "off",
+        "no-unused-vars": ["error", { "vars": "local", "args": "none", "ignoreRestSiblings": true }],
+        
     },
     "parser": "babel-eslint"
 };

@@ -25,6 +25,7 @@ export default class Login extends React.Component {
             email: this.state.formData.email,
             password: this.state.formData.password,
         };
+        this.props.history.push('/dashboard');
         console.log(user);
 
         service.loginAxios(user)
@@ -112,10 +113,10 @@ export default class Login extends React.Component {
                                 (submitted && 'Logged In!') || (!submitted && 'Sign In')
                             }</Button>
                         <Typography style={signInStyle}> Do you have an account?
-                            <Router>
+                            
                                 <Link to={'/register'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                     Sign Up
-                                </Link></Router>
+                                </Link>
                         </Typography>
                     </ValidatorForm>
                 </Paper>
