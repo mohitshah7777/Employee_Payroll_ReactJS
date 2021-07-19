@@ -1,8 +1,11 @@
 import React from 'react';
 import { Grid, Paper, Button } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import Service from '../services/employee';
+const service = new Service();
 
 export default class AddEmployee extends React.Component {
+    _isMounted = false;
     state = {
         formData: {
             firstName: '',
@@ -20,6 +23,10 @@ export default class AddEmployee extends React.Component {
         this.setState({ formData });
     }
 
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         const user = {
@@ -29,7 +36,16 @@ export default class AddEmployee extends React.Component {
             department: this.state.formData.department,
             salary: this.state.formData.salary,
         };
-        console.log(user);
+        // console.log(user);
+        this.props.history.push('/dashboard');
+
+        service.addEmployee(user)
+            .then((res) => {
+                alert(res.data.message)
+            }).catch((error) => {
+                alert(error)
+            })
+
 
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);

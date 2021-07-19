@@ -20,6 +20,10 @@ export default class Login extends React.Component {
         this.setState({ formData });
     }
 
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
     handleSubmit = () => {
         const user = {
             email: this.state.formData.email,
