@@ -4,7 +4,6 @@ const TOKEN = localStorage.getItem('token') ;
 
 class Service {
     addEmployee = (userData) => {
-
         return Axios.post(`/create`, userData, {
             headers: {
                 'token': TOKEN
@@ -13,8 +12,15 @@ class Service {
     }
 
     getEmployee = () => {
-        // const TOKEN = localStorage.getItem('token') ;
         return Axios.get(`/read`, {
+            headers: {
+                'token': TOKEN
+            }
+        })
+    }
+    
+    updateEmployee = (userData) => {
+        return Axios.put('/update/'+userData._id, userData, {
             headers: {
                 'token': TOKEN
             }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,11 +20,9 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link, useHistory } from 'react-router-dom';
-import Add from './Form/EmployeeForm'
+import AddForm from './Form/EmployeeForm'
 import AddParent from './Form/Employees';
 import PopUp from './Popup';
-import Service from '../services/employee';
-const service = new Service();
 
 const drawerWidth = 200;
 
@@ -135,19 +133,6 @@ export default function Dashboard() {
         localStorage.removeItem('token');
         history.push('/');
     }
-    // eslint-disable-next-line
-    const [post, setPosts] = useState([])
-
-    useEffect(() => {
-        service.getEmployee()
-            .then((res) => {
-                console.log(res.data.data)
-                setPosts(res.data.data)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    })
 
     return (
         <>
@@ -197,7 +182,7 @@ export default function Dashboard() {
                             <ListItemIcon>
                                 <AddBoxIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Add" />
+                            <ListItemText primary="AddForm" />
                         </ListItem>
                         <ListItem button>
                             <ListItemIcon>
@@ -222,7 +207,7 @@ export default function Dashboard() {
                 title="Add Employee"
                 openPopUp={openPopUp}
                 setOpenPopUp={setOpenPopUp}
-            ><Add />
+            ><AddForm />
             </PopUp>
         </>
     );

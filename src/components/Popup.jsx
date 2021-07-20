@@ -13,9 +13,8 @@ const useStyles = makeStyles(theme => ({
 export default function Popup(props){
 
     const classes = useStyles();
-
-  // eslint-disable-next-line
     const {title, children, openPopUp, setOpenPopUp} = props
+    
     return(
         <Dialog  open={openPopUp} classes={{ paper: classes.dialogWrapper}}> 
             <DialogTitle>

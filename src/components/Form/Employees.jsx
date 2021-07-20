@@ -4,6 +4,11 @@ import { useEffect } from 'react'
 // import Add from './EmployeeForm'
 import useTable from '../Controls/useTable'
 import Service from '../../services/employee';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import PopUp from '../Popup';
+import UpdateForm from './UpdateForm';
+import { Button } from '@material-ui/core';
 const service = new Service();
 
 
@@ -19,8 +24,9 @@ const headCells = [
     { id: "firstName", label: "First Name" },
     { id: "lastName", label: "Last Name" },
     { id: "email", label: "Email" },
-    { id: "department", label: "Department", disableSorting: true },
-    { id: "salary", label: "Salary" }
+    { id: "department", label: "Department" },
+    { id: "salary", label: "Salary" },
+    { id: "actions", label: "Actions", disableSorting: true }
 ]
 
 export default function AddParent() {
@@ -28,6 +34,7 @@ export default function AddParent() {
     const classes = useStyles()
     // eslint-disable-next-line
     const [records, setRecords] = useState([])
+    const [openPopUp, setOpenPopUp] = React.useState(false);
 
     useEffect(() => {
         service.getEmployee()
@@ -38,7 +45,7 @@ export default function AddParent() {
             .catch((error) => {
                 console.log(error)
             })
-    })
+    },[])
 
     const {
         TblContainer,
@@ -61,6 +68,14 @@ export default function AddParent() {
                                     <TableCell>{item.email}</TableCell>
                                     <TableCell>{item.department}</TableCell>
                                     <TableCell>{item.salary}</TableCell>
+                                    <TableCell align="center">
+                                        <Button onClick = {() => setOpenPopUp(true)}>
+                                            <EditIcon color="primary" />
+                                        </Button>
+                                        <Button>
+                                            <DeleteIcon color="secondary" />
+                                        </Button>
+                                    </TableCell>
                                 </TableRow>
                             ))
                         }
@@ -68,6 +83,12 @@ export default function AddParent() {
                 </TblContainer>
                 <TblPagination />
             </Paper>
+            <PopUp
+            title="Update Employee"
+            openPopUp={openPopUp}
+            setOpenPopUp={setOpenPopUp}
+        ><UpdateForm />
+        </PopUp>
         </>
     )
 }
