@@ -29,13 +29,15 @@ export default class Login extends React.Component {
             email: this.state.formData.email,
             password: this.state.formData.password,
         };
-        this.props.history.push('/dashboard');
         console.log(user);
 
         service.loginAxios(user)
             .then((res) => {
-                alert(res.data.message)
-                localStorage.setItem('token', res.data.token)
+                if(res.data.success === true){
+                    this.props.history.push('/dashboard');
+                    alert(res.data.message)
+                    localStorage.setItem('token', res.data.token)
+                }
             }).catch((error) => {
                 alert("Invalid Credentials")
             })
