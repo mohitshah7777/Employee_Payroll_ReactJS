@@ -19,7 +19,7 @@ const headCells = [
     { id: "firstName", label: "First Name" },
     { id: "lastName", label: "Last Name" },
     { id: "email", label: "Email" },
-    { id: "department", label: "Department" },
+    { id: "department", label: "Department", disableSorting: true },
     { id: "salary", label: "Salary" }
 ]
 
