@@ -1,14 +1,13 @@
 import { makeStyles, Paper, TableBody, TableCell, TableRow } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-// import Add from './EmployeeForm'
 import useTable from '../Controls/useTable'
 import Service from '../../services/employee';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PopUp from '../Popup';
 import UpdateForm from './UpdateForm';
-import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 const service = new Service();
 
 
@@ -16,7 +15,6 @@ const useStyles = makeStyles(theme => ({
     pageContent: {
         margin: theme.spacing(12),
         padding: theme.spacing(2),
-        // marginBottom: theme.spacing(5),
     }
 }))
 
@@ -69,12 +67,12 @@ export default function AddParent() {
                                     <TableCell>{item.department}</TableCell>
                                     <TableCell>{item.salary}</TableCell>
                                     <TableCell align="center">
-                                        <Button onClick = {() => setOpenPopUp(true)}>
+                                        <IconButton onClick = {() => setOpenPopUp(true)}>
                                             <EditIcon color="primary" />
-                                        </Button>
-                                        <Button>
+                                        </IconButton>
+                                        <IconButton>
                                             <DeleteIcon color="secondary" />
-                                        </Button>
+                                        </IconButton>
                                     </TableCell>
                                 </TableRow>
                             ))

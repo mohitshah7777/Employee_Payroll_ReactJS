@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 // import Controls from '../Controls/Controls'
 import { Button } from '@material-ui/core';
-import Service from '../../services/employee'
-const service = new Service();
+// import Service from '../../services/employee'
+// const service = new Service();
 
 const initialValues = {
     firstName: '',
@@ -13,8 +13,9 @@ const initialValues = {
     salary: ''
 }
 
-export default function AddForm() {
+export default function AddForm(props) {
 
+    const {addOrEdit} = props
     const [values, setValues] = useState(initialValues)
 
     const handleChange = (e) => {
@@ -32,15 +33,7 @@ export default function AddForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values)
-
-        service.addEmployee(values)
-            .then((res) => {
-                alert(res.data.message)
-            }).catch((error) => {
-                alert(error)
-            })
-        resetForm()
-
+        addOrEdit(values, resetForm)
     }
 
     const textStyle = { margin: '5px 0' }

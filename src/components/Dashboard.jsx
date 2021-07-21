@@ -23,6 +23,8 @@ import { Link, useHistory } from 'react-router-dom';
 import AddForm from './Form/EmployeeForm'
 import AddParent from './Form/Employees';
 import PopUp from './Popup';
+import Service from '../services/employee';
+const service = new Service();
 
 const drawerWidth = 200;
 
@@ -30,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         backgroundColor: theme.palette.grey[200],
+    },
+    pageContent: {
+        margin: theme.spacing(12),
+        padding: theme.spacing(2),
+        // marginBottom: theme.spacing(5),
     },
     table: {
         Width: 500,
@@ -116,10 +123,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function Dashboard() {
+    
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [openPopUp, setOpenPopUp] = React.useState(false);
+    // eslint-disable-next-line
+    const [records, setRecords] = React.useState([])
     const history = useHistory();
 
     const handleDrawerOpen = () => {
@@ -132,6 +143,17 @@ export default function Dashboard() {
     const handleLogOut = () => {
         localStorage.removeItem('token');
         history.push('/');
+    }
+
+    const addOrEdit = (employee, resetForm) => {
+        service.addEmployee(employee)
+        .then((res) => {
+            alert(res.data.message)
+        }).catch((error) => {
+            alert(error)
+        })
+        resetForm()
+        setOpenPopUp(false)
     }
 
     return (
@@ -207,7 +229,8 @@ export default function Dashboard() {
                 title="Add Employee"
                 openPopUp={openPopUp}
                 setOpenPopUp={setOpenPopUp}
-            ><AddForm />
+            ><AddForm 
+                addOrEdit={addOrEdit} />
             </PopUp>
         </>
     );
