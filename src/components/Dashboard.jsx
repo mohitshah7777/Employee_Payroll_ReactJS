@@ -123,7 +123,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 export default function Dashboard() {
     
     const classes = useStyles();
@@ -154,8 +153,10 @@ export default function Dashboard() {
         })
         resetForm()
         setOpenPopUp(false)
+        // service.getEmployee()
     }
 
+ 
     return (
         <>
             <div className={classes.root}>
@@ -225,6 +226,7 @@ export default function Dashboard() {
                     <div className={classes.appBarSpacer} />
                 </main>
             </div>
+           
             <PopUp
                 title="Add Employee"
                 openPopUp={openPopUp}

@@ -30,9 +30,12 @@ const headCells = [
 export default function AddParent() {
 
     const classes = useStyles()
-    // eslint-disable-next-line
+     // eslint-disable-next-line
     const [records, setRecords] = useState([])
     const [openPopUp, setOpenPopUp] = React.useState(false);
+    // eslint-disable-next-line
+    const [recordForEdit, setRecordForEdit] = React.useState(null)
+    const [employeeId, setEmployeeId] = useState(null);
 
     useEffect(() => {
         service.getEmployee()
@@ -44,6 +47,33 @@ export default function AddParent() {
                 console.log(error)
             })
     },[])
+
+    const addOrEdit = (employee, resetForm) => {
+
+        const employeeData = {
+            _id: employeeId,
+            firstName: employee.firstName,
+            lastName: employee.lastName,
+            email: employee.email,
+            department: employee.department,
+            salary: employee.salary,
+          };
+
+        service.updateEmployee(employeeData)
+        .then((res) => {
+            alert(res.data.message)
+        }).catch((error) => {
+            alert(error)
+        })
+        resetForm()
+        setOpenPopUp(false)
+    }
+
+    const openInPopUp = item => {
+        setRecordForEdit(item)
+        setOpenPopUp(true)
+        setEmployeeId(item._id)
+    }
 
     const {
         TblContainer,
@@ -67,7 +97,7 @@ export default function AddParent() {
                                     <TableCell>{item.department}</TableCell>
                                     <TableCell>{item.salary}</TableCell>
                                     <TableCell align="center">
-                                        <IconButton onClick = {() => setOpenPopUp(true)}>
+                                        <IconButton onClick = {() => openInPopUp(item)}>
                                             <EditIcon color="primary" />
                                         </IconButton>
                                         <IconButton>
@@ -85,7 +115,9 @@ export default function AddParent() {
             title="Update Employee"
             openPopUp={openPopUp}
             setOpenPopUp={setOpenPopUp}
-        ><UpdateForm />
+        ><UpdateForm 
+            addOrEdit = {addOrEdit}
+            recordForEdit={recordForEdit}/>
         </PopUp>
         </>
     )

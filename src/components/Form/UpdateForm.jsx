@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { Button } from '@material-ui/core';
-import Service from '../../services/employee';
-const service = new Service();
+// import Service from '../../services/employee';
+// const service = new Service();
 
 const initialValues = {
+    _id:'',
     firstName: '',
     lastName: '',
     email: '',
@@ -14,6 +15,7 @@ const initialValues = {
 
 export default function UpdateForm(props) {
 
+    const { addOrEdit, recordForEdit } = props
     const [values, setValues] = useState(initialValues)
 
     const handleChange = (e) => {
@@ -31,15 +33,16 @@ export default function UpdateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values)
-        service.updateEmployee(values)
-        .then((res) => {
-            alert(res.data.message)
-        }).catch((error) => {
-            alert(error)
-        })
+        addOrEdit(values, resetForm)
         resetForm()
     }
 
+    useEffect( () => {
+        if(recordForEdit != null)
+            setValues({
+                ...recordForEdit
+            })
+    }, [recordForEdit])
 
     const textStyle = { margin: '5px 0' }
     const btnstyle = { margin: '25px 110px', width: 150 }
