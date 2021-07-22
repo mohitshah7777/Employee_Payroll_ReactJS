@@ -3,6 +3,9 @@ import { makeStyles, Table, TableCell, TableHead, TablePagination, TableRow, Tab
 
 const useStyles = makeStyles(theme => ({
     table : {
+        // width:'95%',
+        // display:'block',
+        overflowX:'auto',
         marginTop: theme.spacing(3),
         '& thead th' : {
             fontWeight: '600',
@@ -30,7 +33,7 @@ export default function useTable(records, headCells) {
     const [ orderBy, SetOrderBy ] = useState()
 
     const TblContainer = props => (
-        <Table className={classes.table}>
+        <Table size="medium" className={classes.table}>
             {props.children}
         </Table>
     )

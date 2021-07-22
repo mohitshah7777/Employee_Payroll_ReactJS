@@ -7,14 +7,18 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PopUp from '../Popup';
 import UpdateForm from './UpdateForm';
+import Notification from '../Controls/Notifications';
 import { IconButton } from '@material-ui/core';
 const service = new Service();
 
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
-        margin: theme.spacing(12),
-        padding: theme.spacing(2),
+        marginTop: theme.spacing(11),
+        marginLeft: theme.spacing(3),
+        marginRight: theme.spacing(3),
+        // paddingTop: theme.spacing(1),
+        
     }
 }))
 
@@ -30,12 +34,13 @@ const headCells = [
 export default function AddParent() {
 
     const classes = useStyles()
-     // eslint-disable-next-line
+    // eslint-disable-next-line no-unused-vars
+    // const [a, setA] = useState(0);
     const [records, setRecords] = useState([])
     const [openPopUp, setOpenPopUp] = React.useState(false);
-    // eslint-disable-next-line
     const [recordForEdit, setRecordForEdit] = React.useState(null)
     const [employeeId, setEmployeeId] = useState(null);
+    const [notify, setNotify] = useState({isOpen: false, message:'', type:''})
 
     useEffect(() => {
         service.getEmployee()
@@ -48,8 +53,7 @@ export default function AddParent() {
             })
     },[])
 
-    const addOrEdit = (employee, resetForm) => {
-
+    const editEmployee = (employee, resetForm) => {
         const employeeData = {
             _id: employeeId,
             firstName: employee.firstName,
@@ -61,12 +65,17 @@ export default function AddParent() {
 
         service.updateEmployee(employeeData)
         .then((res) => {
-            alert(res.data.message)
+            // alert(res.data.message)
         }).catch((error) => {
             alert(error)
         })
         resetForm()
         setOpenPopUp(false)
+        setNotify({
+            isOpen: true,
+            message: 'Updated Successfully',
+            type:'success'
+        })
     }
 
     const openInPopUp = item => {
@@ -84,7 +93,7 @@ export default function AddParent() {
 
     return (
         <>
-            <Paper className={classes.pageContent}>
+            <Paper elevation={3} className={classes.pageContent}>
                 <TblContainer>
                     <TblHead />
                     <TableBody>
@@ -96,11 +105,11 @@ export default function AddParent() {
                                     <TableCell>{item.email}</TableCell>
                                     <TableCell>{item.department}</TableCell>
                                     <TableCell>{item.salary}</TableCell>
-                                    <TableCell align="center">
-                                        <IconButton onClick = {() => openInPopUp(item)}>
+                                    <TableCell>
+                                        <IconButton edge="start" size="small" onClick = {() => openInPopUp(item)}>
                                             <EditIcon color="primary" />
                                         </IconButton>
-                                        <IconButton>
+                                        <IconButton size="small">
                                             <DeleteIcon color="secondary" />
                                         </IconButton>
                                     </TableCell>
@@ -116,9 +125,13 @@ export default function AddParent() {
             openPopUp={openPopUp}
             setOpenPopUp={setOpenPopUp}
         ><UpdateForm 
-            addOrEdit = {addOrEdit}
+            editEmployee = {editEmployee}
             recordForEdit={recordForEdit}/>
         </PopUp>
+        <Notification 
+        notify={notify}
+        setNotify={setNotify  }
+        />
         </>
     )
 }

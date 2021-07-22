@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { Button } from '@material-ui/core';
-// import Service from '../../services/employee';
-// const service = new Service();
 
 const initialValues = {
     _id:'',
@@ -15,7 +13,7 @@ const initialValues = {
 
 export default function UpdateForm(props) {
 
-    const { addOrEdit, recordForEdit } = props
+    const { editEmployee, recordForEdit } = props
     const [values, setValues] = useState(initialValues)
 
     const handleChange = (e) => {
@@ -33,7 +31,7 @@ export default function UpdateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values)
-        addOrEdit(values, resetForm)
+        editEmployee(values, resetForm)
         resetForm()
     }
 

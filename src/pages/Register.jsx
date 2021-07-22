@@ -55,7 +55,7 @@ export default class Register extends React.Component {
             .then((res) => {
                 alert(res.data.message)
             }).catch((error) => {
-                alert(error)
+                alert(error.message)
             })
 
         this.setState({ submitted: true }, () => {
@@ -145,7 +145,7 @@ export default class Register extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                             value={formData.password}
-                            validators={['required', 'matchRegexp:^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$']}
+                            validators={['required', 'matchRegexp:^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{7,15}$']}
                             errorMessages={["this field is required", "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character, 8 characters"]}
                         />
                         <TextValidator

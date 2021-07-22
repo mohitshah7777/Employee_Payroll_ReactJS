@@ -1,6 +1,7 @@
 import { Dialog, DialogContent, DialogTitle, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles(theme => ({
@@ -22,9 +23,9 @@ export default function Popup(props){
                     <Typography variant="h6" component="div" style={{flexGrow:1}}>
                         {title}
                     </Typography>
-                    <Button onClick={() => setOpenPopUp(false)}>
+                    <IconButton size="small" onClick={() => setOpenPopUp(false)}>
                         <CancelIcon  color="secondary"/>
-                    </Button>
+                    </IconButton>
             </div>
             </DialogTitle>
             <DialogContent dividers>

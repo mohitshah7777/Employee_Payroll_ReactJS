@@ -23,6 +23,7 @@ import { Link, useHistory } from 'react-router-dom';
 import AddForm from './Form/EmployeeForm'
 import AddParent from './Form/Employees';
 import PopUp from './Popup';
+import Notification from '../components/Controls/Notifications';
 import Service from '../services/employee';
 const service = new Service();
 
@@ -130,6 +131,7 @@ export default function Dashboard() {
     const [openPopUp, setOpenPopUp] = React.useState(false);
     // eslint-disable-next-line
     const [records, setRecords] = React.useState([])
+    const [notify, setNotify] = React.useState({isOpen: false, message:'', type:''})
     const history = useHistory();
 
     const handleDrawerOpen = () => {
@@ -144,16 +146,21 @@ export default function Dashboard() {
         history.push('/');
     }
 
-    const addOrEdit = (employee, resetForm) => {
+    const addEmployee = (employee, resetForm) => {
         service.addEmployee(employee)
         .then((res) => {
-            alert(res.data.message)
+            // alert(res.data.message)
         }).catch((error) => {
             alert(error)
         })
         resetForm()
         setOpenPopUp(false)
         // service.getEmployee()
+        setNotify({
+            isOpen: true,
+            message: 'Employee Added Successfully',
+            type:'success'
+        })
     }
 
  
@@ -205,7 +212,7 @@ export default function Dashboard() {
                             <ListItemIcon>
                                 <AddBoxIcon />
                             </ListItemIcon>
-                            <ListItemText primary="AddForm" />
+                            <ListItemText primary="Add" />
                         </ListItem>
                         <ListItem button>
                             <ListItemIcon>
@@ -232,8 +239,12 @@ export default function Dashboard() {
                 openPopUp={openPopUp}
                 setOpenPopUp={setOpenPopUp}
             ><AddForm 
-                addOrEdit={addOrEdit} />
+                addEmployee={addEmployee} />
             </PopUp>
+            <Notification 
+            notify={notify}
+            setNotify={setNotify  }
+            />
         </>
     );
 }

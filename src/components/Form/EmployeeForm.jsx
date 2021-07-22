@@ -15,7 +15,7 @@ const initialValues = {
 
 export default function AddForm(props) {
 
-    const {addOrEdit} = props
+    const {addEmployee} = props
     const [values, setValues] = useState(initialValues)
 
     const handleChange = (e) => {
@@ -33,7 +33,7 @@ export default function AddForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values)
-        addOrEdit(values, resetForm)
+        addEmployee(values, resetForm)
     }
 
     const textStyle = { margin: '5px 0' }
