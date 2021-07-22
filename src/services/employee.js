@@ -26,6 +26,15 @@ class Service {
             }
         })
     }
+
+    deleteEmployee = (_id) => {
+        // console.log("user id:",_id)
+        return Axios.delete(`/delete/`+_id, {
+            headers: {
+                'token': TOKEN
+            }
+        })
+    }
 }
 
 export default Service;

@@ -149,18 +149,18 @@ export default function Dashboard() {
     const addEmployee = (employee, resetForm) => {
         service.addEmployee(employee)
         .then((res) => {
-            // alert(res.data.message)
+            setNotify({
+                isOpen: true,
+                message: 'Employee Added Successfully',
+                type:'success'
+            })
         }).catch((error) => {
             alert(error)
         })
         resetForm()
         setOpenPopUp(false)
         // service.getEmployee()
-        setNotify({
-            isOpen: true,
-            message: 'Employee Added Successfully',
-            type:'success'
-        })
+
     }
 
  

@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PopUp from '../Popup';
 import UpdateForm from './UpdateForm';
 import Notification from '../Controls/Notifications';
+import ConfirmDialog from '../Controls/ConfirmDialog';
 import { IconButton } from '@material-ui/core';
 const service = new Service();
 
@@ -41,6 +42,7 @@ export default function AddParent() {
     const [recordForEdit, setRecordForEdit] = React.useState(null)
     const [employeeId, setEmployeeId] = useState(null);
     const [notify, setNotify] = useState({isOpen: false, message:'', type:''})
+    const [confirmDialog, setConfirmDialog] = useState({isOpen:false, title:'', subTitle: ''})
 
     useEffect(() => {
         service.getEmployee()
@@ -65,23 +67,39 @@ export default function AddParent() {
 
         service.updateEmployee(employeeData)
         .then((res) => {
-            // alert(res.data.message)
+            setNotify({
+                isOpen: true,
+                message: 'Updated Successfully',
+                type:'success'
+            })
         }).catch((error) => {
             alert(error)
         })
         resetForm()
         setOpenPopUp(false)
-        setNotify({
-            isOpen: true,
-            message: 'Updated Successfully',
-            type:'success'
-        })
     }
 
     const openInPopUp = item => {
         setRecordForEdit(item)
         setOpenPopUp(true)
         setEmployeeId(item._id)
+    }
+
+    const onDelete = (_id) => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false
+        })
+        service.deleteEmployee(_id)
+        .then((res) => {
+            setNotify({
+                isOpen: true,
+                message: 'Deleted Successfully',
+                type:'error'
+            })
+        }).catch((error) => {
+            alert(error)
+        })
     }
 
     const {
@@ -106,11 +124,26 @@ export default function AddParent() {
                                     <TableCell>{item.department}</TableCell>
                                     <TableCell>{item.salary}</TableCell>
                                     <TableCell>
-                                        <IconButton edge="start" size="small" onClick = {() => openInPopUp(item)}>
-                                            <EditIcon color="primary" />
+                                        <IconButton 
+                                            edge="start" 
+                                            size="small" 
+                                            onClick = {() => openInPopUp(item)}
+                                        >
+                                        <EditIcon color="primary" />
                                         </IconButton>
-                                        <IconButton size="small">
-                                            <DeleteIcon color="secondary" />
+                                        <IconButton 
+                                            size="small" 
+                                            onClick = {() => 
+                                                setConfirmDialog({
+                                                    isOpen:true,
+                                                    title: 'Are you sure to delete this record?',
+                                                    subTitle: "You Can't undo this operation",
+                                                    onConfirm: () => {onDelete(item._id)}
+                                                })
+                                                // onDelete(item._id)
+                                            }
+                                        >
+                                        <DeleteIcon color="secondary" />
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
@@ -131,6 +164,10 @@ export default function AddParent() {
         <Notification 
         notify={notify}
         setNotify={setNotify  }
+        />
+        <ConfirmDialog 
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
         />
         </>
     )
