@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
-// import Controls from '../Controls/Controls'
 import { Button } from '@material-ui/core';
-// import Service from '../../services/employee'
-// const service = new Service();
 
 const initialValues = {
     firstName: '',
@@ -39,7 +36,7 @@ export default function AddForm(props) {
     const textStyle = { margin: '5px 0' }
     const btnstyle = { margin: '25px 110px', width: 150 }
     return (
-        <ValidatorForm onSubmit={handleSubmit}>
+        <ValidatorForm data-testid="form" onSubmit={handleSubmit}>
             <TextValidator
                 data-testid="firstname"
                 name='firstName'
