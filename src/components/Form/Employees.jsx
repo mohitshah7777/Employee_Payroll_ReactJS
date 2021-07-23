@@ -12,7 +12,6 @@ import ConfirmDialog from '../Controls/ConfirmDialog';
 import { IconButton } from '@material-ui/core';
 const service = new Service();
 
-
 const useStyles = makeStyles(theme => ({
     pageContent: {
         marginTop: theme.spacing(11),
@@ -35,9 +34,9 @@ const headCells = [
 export default function AddParent() {
 
     const classes = useStyles()
-    // eslint-disable-next-line no-unused-vars
-    // const [a, setA] = useState(0);
     const [records, setRecords] = useState([])
+    // eslint-disable-next-line no-unused-vars
+    const [records1, setRecords1] = useState(0)
     const [openPopUp, setOpenPopUp] = React.useState(false);
     const [recordForEdit, setRecordForEdit] = React.useState(null)
     const [employeeId, setEmployeeId] = useState(null);
@@ -45,15 +44,19 @@ export default function AddParent() {
     const [confirmDialog, setConfirmDialog] = useState({isOpen:false, title:'', subTitle: ''})
 
     useEffect(() => {
+        getAllemployees()
+    },[setRecords1])
+
+    const getAllemployees = () => {
         service.getEmployee()
-            .then((res) => {
-                console.log(res.data.data)
-                setRecords(res.data.data)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
-    },[])
+        .then((res) => {
+            console.log(res.data.data)
+            setRecords(res.data.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
 
     const editEmployee = (employee, resetForm) => {
         const employeeData = {
@@ -72,6 +75,7 @@ export default function AddParent() {
                 message: 'Updated Successfully',
                 type:'success'
             })
+            getAllemployees()
         }).catch((error) => {
             alert(error)
         })
@@ -85,7 +89,7 @@ export default function AddParent() {
         setEmployeeId(item._id)
     }
 
-    const onDelete = (_id) => {
+    const deleteEmployee = (_id) => {
         setConfirmDialog({
             ...confirmDialog,
             isOpen: false
@@ -97,9 +101,11 @@ export default function AddParent() {
                 message: 'Deleted Successfully',
                 type:'error'
             })
+            getAllemployees()
         }).catch((error) => {
             alert(error)
         })
+        
     }
 
     const {
@@ -138,7 +144,7 @@ export default function AddParent() {
                                                     isOpen:true,
                                                     title: 'Are you sure to delete this record?',
                                                     subTitle: "You Can't undo this operation",
-                                                    onConfirm: () => {onDelete(item._id)}
+                                                    onConfirm: () => {deleteEmployee(item._id)}
                                                 })
                                                 // onDelete(item._id)
                                             }

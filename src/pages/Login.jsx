@@ -65,6 +65,7 @@ export default class Login extends React.Component {
         console.log(formData)
 
         return (
+            <Router>
             <Grid>
                 <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
@@ -127,6 +128,7 @@ export default class Login extends React.Component {
                     </ValidatorForm>
                 </Paper>
             </Grid>
+            </Router>
         )
     }
 }

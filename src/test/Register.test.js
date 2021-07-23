@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { shallow } from 'enzyme';
 import React from 'react';
 import Register from '../pages/Register';

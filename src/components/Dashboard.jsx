@@ -24,6 +24,7 @@ import AddForm from './Form/EmployeeForm'
 import AddParent from './Form/Employees';
 import PopUp from './Popup';
 import Notification from '../components/Controls/Notifications';
+import { BrowserRouter as Router} from "react-router-dom";
 import Service from '../services/employee';
 const service = new Service();
 
@@ -129,8 +130,6 @@ export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [openPopUp, setOpenPopUp] = React.useState(false);
-    // eslint-disable-next-line
-    const [records, setRecords] = React.useState([])
     const [notify, setNotify] = React.useState({isOpen: false, message:'', type:''})
     const history = useHistory();
 
@@ -159,19 +158,18 @@ export default function Dashboard() {
         })
         resetForm()
         setOpenPopUp(false)
-        // service.getEmployee()
-
+        service.getEmployee()
     }
-
  
     return (
         <>
+        <Router>
             <div className={classes.root}>
-
                 <CssBaseline />
-                <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                <AppBar  data-testid="appbar" position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
                         <IconButton
+                            data-testid="iconbutton"
                             edge="start"
                             color="inherit"
                             aria-label="open drawer"
@@ -180,15 +178,16 @@ export default function Dashboard() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                        <Typography data-testid="typography" component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                             Dashboard
                         </Typography>
-                        <IconButton onClick={handleLogOut} className={classes.myClassName} color="inherit">
+                        <IconButton  data-testid="logoutbutton" onClick={handleLogOut} className={classes.myClassName} color="inherit">
                             <LogoutIcon />
                         </IconButton>
                     </Toolbar>
                 </AppBar>
                 <Drawer
+                    data-testid="drawer"
                     variant="permanent"
                     classes={{
                         paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
@@ -196,31 +195,31 @@ export default function Dashboard() {
                     open={open}
                 >
                     <div className={classes.toolbarIcon}>
-                        <IconButton onClick={handleDrawerClose}>
+                        <IconButton data-testid="drawerclosebutton" onClick={handleDrawerClose}>
                             <ChevronLeftIcon />
                         </IconButton>
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button component={Link} to={'/dashboard'}>
+                        <ListItem  data-testid="listbutton" button component={Link} to={'/dashboard'}>
                             <ListItemIcon>
                                 <ViewListIcon />
                             </ListItemIcon>
                             <ListItemText primary="List" />
                         </ListItem>
-                        <ListItem button onClick={() => setOpenPopUp(true)}>
+                        <ListItem  data-testid="addbutton" button onClick={() => setOpenPopUp(true)}>
                             <ListItemIcon>
                                 <AddBoxIcon />
                             </ListItemIcon>
                             <ListItemText primary="Add" />
                         </ListItem>
-                        <ListItem button>
+                        <ListItem  data-testid="editbutton" button>
                             <ListItemIcon>
                                 <EditIcon />
                             </ListItemIcon>
                             <ListItemText primary="Edit" />
                         </ListItem>
-                        <ListItem button>
+                        <ListItem data-testid="deletebutton" button>
                             <ListItemIcon>
                                 <DeleteIcon />
                             </ListItemIcon>
@@ -235,16 +234,19 @@ export default function Dashboard() {
             </div>
            
             <PopUp
+                data-testid="popup"
                 title="Add Employee"
                 openPopUp={openPopUp}
                 setOpenPopUp={setOpenPopUp}
             ><AddForm 
                 addEmployee={addEmployee} />
             </PopUp>
-            <Notification 
+            <Notification
+            data-testid="notification" 
             notify={notify}
             setNotify={setNotify  }
             />
+            </Router>
         </>
     );
 }

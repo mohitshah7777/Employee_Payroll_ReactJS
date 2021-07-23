@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Link } from 'react-router-dom';
+import { BrowserRouter as Router} from "react-router-dom";
 import Service from '../services/user'
 const service = new Service();
 
@@ -84,6 +85,7 @@ export default class Register extends React.Component {
         console.log(formData)
 
         return (
+            <Router>
             <Grid>
                 <Paper elevation={20} style={paperStyle}>
                     <Grid align='center'>
@@ -184,6 +186,7 @@ export default class Register extends React.Component {
                     </ValidatorForm>
                 </Paper>
             </Grid>
+            </Router>
         )
     }
 }
