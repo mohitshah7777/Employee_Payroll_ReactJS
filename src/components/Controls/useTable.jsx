@@ -46,8 +46,9 @@ export default function useTable(records, headCells) {
             SetOrderBy(cellId)
         }
 
-        return (<TableHead>
-            <TableRow>
+        return (
+            <TableHead data-testid="tablehead">
+            <TableRow data-testid="tablerow">
                 {
                     headCells.map(headCell => (
                     <TableCell key={headCell.id} 

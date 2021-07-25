@@ -9,14 +9,15 @@ import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 
 describe('Test Login component', () => {
-    it('check if h3 tag is rendered properly', () => {
+    it('givenDataTestId_whenVisitedLoginPage_shouldHave3TagProperty', (done) => {
         const component = shallow(<Login />)
         expect(component.find('#h3tag').text()).toEqual('EMPLOYEE PAYROLL APP')
+        done()
     })
 })
 
 describe('Test Form Component', () => {
-    it('check if form components displays properly', () => {
+    it('givenDataTestId_whenVisitedLoginFormComponent_shouldRenderProperly', (done) => {
         const { getByTestId } = render(<Login />);
         const form = getByTestId('form');
         const email = getByTestId('email');
@@ -29,9 +30,10 @@ describe('Test Form Component', () => {
         expect(password).toBeInTheDocument();
         expect(button).toBeInTheDocument();
         expect(text).toBeInTheDocument();
+        done()
     })
 
-    it('check if form components has correct value', () => {
+    it('givenDataTestId_whenVisitedLoginFormComponent_shouldHaveCorrectValues', (done) => {
         const { getByTestId } = render(<Login />);
         const email = getByTestId('email');
         const password = getByTestId('password');
@@ -40,5 +42,6 @@ describe('Test Form Component', () => {
         expect(email).toHaveTextContent('Email');
         expect(password).toHaveTextContent('Password');
         expect(button).toHaveTextContent('Sign In');
+        done()
     })
 })

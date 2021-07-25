@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(3),
         marginRight: theme.spacing(3),
         // paddingTop: theme.spacing(1),
-        
     }
 }))
 
@@ -120,24 +119,24 @@ export default function AddParent() {
             <Paper elevation={3} className={classes.pageContent}>
                 <TblContainer>
                     <TblHead />
-                    <TableBody>
+                    <TableBody data-testid="tablebody">
                         {
                             recordsAfterPagingAndSorting().map(item => (
-                                <TableRow key={item._id}>
-                                    <TableCell>{item.firstName}</TableCell>
-                                    <TableCell>{item.lastName}</TableCell>
-                                    <TableCell>{item.email}</TableCell>
-                                    <TableCell>{item.department}</TableCell>
-                                    <TableCell>{item.salary}</TableCell>
-                                    <TableCell>
-                                        <IconButton 
+                                <TableRow data-testid="tablerow" key={item._id}>
+                                    <TableCell data-testid="tablecell" >{item.firstName}</TableCell>
+                                    <TableCell data-testid="tablecell">{item.lastName}</TableCell>
+                                    <TableCell data-testid="tablecell">{item.email}</TableCell>
+                                    <TableCell data-testid="tablecell">{item.department}</TableCell>
+                                    <TableCell data-testid="tablecell">{item.salary}</TableCell>
+                                    <TableCell data-testid="tablecell">
+                                        <IconButton data-testid="editbutton"
                                             edge="start" 
                                             size="small" 
                                             onClick = {() => openInPopUp(item)}
                                         >
                                         <EditIcon color="primary" />
                                         </IconButton>
-                                        <IconButton 
+                                        <IconButton data-testid="deletebutton"
                                             size="small" 
                                             onClick = {() => 
                                                 setConfirmDialog({

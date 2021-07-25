@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -129,6 +130,8 @@ export default function Dashboard() {
     
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
+    const [records, setRecords] = React.useState([])
+    const [records1, setRecords1] = React.useState(0)
     const [openPopUp, setOpenPopUp] = React.useState(false);
     const [notify, setNotify] = React.useState({isOpen: false, message:'', type:''})
     const history = useHistory();
@@ -145,6 +148,21 @@ export default function Dashboard() {
         history.push('/');
     }
 
+    useEffect(() => {
+        getAllemployees()
+    },[setRecords1])
+
+    const getAllemployees = () => {
+        service.getEmployee()
+        .then((res) => {
+            console.log(res.data.data)
+            setRecords(res.data.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
     const addEmployee = (employee, resetForm) => {
         service.addEmployee(employee)
         .then((res) => {
@@ -158,7 +176,7 @@ export default function Dashboard() {
         })
         resetForm()
         setOpenPopUp(false)
-        service.getEmployee()
+        getAllemployees();
     }
  
     return (
@@ -166,7 +184,7 @@ export default function Dashboard() {
         <Router>
             <div className={classes.root}>
                 <CssBaseline />
-                <AppBar  data-testid="appbar" position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                <AppBar data-testid="appbar" position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
                         <IconButton
                             data-testid="iconbutton"
@@ -207,7 +225,7 @@ export default function Dashboard() {
                             </ListItemIcon>
                             <ListItemText primary="List" />
                         </ListItem>
-                        <ListItem  data-testid="addbutton" button onClick={() => setOpenPopUp(true)}>
+                        <ListItem className={'button'} button data-testid="addbutton" onClick={() => setOpenPopUp(true)}>
                             <ListItemIcon>
                                 <AddBoxIcon />
                             </ListItemIcon>

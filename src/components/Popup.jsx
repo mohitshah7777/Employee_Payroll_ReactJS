@@ -17,13 +17,14 @@ export default function Popup(props){
     const {title, children, openPopUp, setOpenPopUp} = props
     
     return(
-        <Dialog  open={openPopUp} classes={{ paper: classes.dialogWrapper}}> 
-            <DialogTitle>
+        <>
+        <Dialog data-testid="dialog" open={openPopUp} classes={{ paper: classes.dialogWrapper}}> 
+            <DialogTitle data-testid="title">
             <div style={{display:'flex'}}>
-                    <Typography variant="h6" component="div" style={{flexGrow:1}}>
+                    <Typography data-testid="typography" variant="h6" component="div" style={{flexGrow:1}}>
                         {title}
                     </Typography>
-                    <IconButton size="small" onClick={() => setOpenPopUp(false)}>
+                    <IconButton data-testid="cancelbutton" size="small" onClick={() => setOpenPopUp(false)}>
                         <CancelIcon  color="secondary"/>
                     </IconButton>
             </div>
@@ -32,7 +33,7 @@ export default function Popup(props){
                 {children}
             </DialogContent>
         </Dialog>
-
+    </>
     )
 
 }

@@ -9,14 +9,15 @@ import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 
 describe('Test Register component', () => {
-    it('check if h3 tag is rendered properly', () => {
+    it('givenDataTestId_whenVisitedLoginPage_shouldHave3TagProperty', (done) => {
         const component = shallow(<Register />)
         expect(component.find('#h3tag').text()).toEqual('EMPLOYEE PAYROLL APP')
+        done()
     })
 })
 
 describe('Test Form Component', () => {
-    it('check if form components displays properly', () => {
+    it('givenDataTestId_whenVisitedRegisterFormComponent_shouldRenderProperly', (done) => {
         const { getByTestId } = render(<Register />);
         const form = getByTestId('form');
         const firstname = getByTestId('firstname');
@@ -35,9 +36,10 @@ describe('Test Form Component', () => {
         expect(confirmpassword).toBeInTheDocument();
         expect(button).toBeInTheDocument();
         expect(text).toBeInTheDocument();
+        done()
     })
 
-    it('check if form components has correct value', () => {
+    it('givenDataTestId_whenVisitedRegisterFormComponent_shouldHaveCorrectValues', (done) => {
         const { getByTestId } = render(<Register />);
         const firstname = getByTestId('firstname');
         const lastname = getByTestId('lastname');
@@ -52,5 +54,6 @@ describe('Test Form Component', () => {
         expect(password).toHaveTextContent('Password');
         expect(confirmpassword).toHaveTextContent('Confirm password');
         expect(button).toHaveTextContent('Sign up');
+        done()
     })
 })
