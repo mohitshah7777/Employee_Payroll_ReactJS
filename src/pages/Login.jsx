@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Button, Typography } from '@material-ui/core';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import Service from '../services/user';
 const service = new Service();
 
@@ -22,6 +22,10 @@ export default class Login extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+    }
+
+    handleRedirect = () => {
+        this.props.history.push('/register')
     }
 
     handleSubmit = () => {
@@ -104,9 +108,9 @@ export default class Login extends React.Component {
                         />
                         <Typography data-testid="typography" style={forgotStyle}>
                             <Router>
-                                <Link to={''} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                                <Redirect to={''} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                     Forgot password?
-                                </Link></Router>
+                                </Redirect></Router>
                         </Typography>
                         <Button
                             data-testid="button"
@@ -121,7 +125,7 @@ export default class Login extends React.Component {
                             }</Button>
                         <Typography style={signInStyle}> Do you have an account?
                             
-                                <Link to={'/register'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                                <Link to={'/register'} onClick={this.handleRedirect} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                     Sign Up
                                 </Link>
                         </Typography>

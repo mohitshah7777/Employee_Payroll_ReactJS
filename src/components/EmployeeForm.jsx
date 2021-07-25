@@ -42,8 +42,8 @@ export default function EmployeeForm(props) {
             })
     }, [recordForEdit])
 
-    const textStyle = { margin: '5px 0' }
-    const btnstyle = { margin: '25px 110px', width: 150 }
+    const textStyle = { margin: '5px 0', color:"#2D3B49" }
+    const btnstyle = { margin: '25px 110px', width: 150, backgroundColor:"#00AEC3" }
     return (
         <ValidatorForm data-testid="form" onSubmit={handleSubmit}>
             <TextValidator

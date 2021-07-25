@@ -47,10 +47,10 @@ const useStyles = makeStyles((theme) => ({
         Width: 500,
     },
     myClassName: {
-        backgroundColor: "#3F51B5",
+        backgroundColor: "#2D3B49",
         position: "relative",
         "&:hover": {
-            backgroundColor: "#DC143C"
+            backgroundColor: "#B22222"
         }
     },
     toolbar: {
@@ -64,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
     },
     appBar: {
+        backgroundColor:"#2D3B49",
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
@@ -310,25 +311,25 @@ export default function Dashboard() {
                         <List>
                             <ListItem data-testid="listbutton" button component={Link} to={'/dashboard'}>
                                 <ListItemIcon>
-                                    <ViewListIcon />
+                                    <ViewListIcon style={{fill: "#2D3B49"}} />
                                 </ListItemIcon>
                                 <ListItemText primary="List" />
                             </ListItem>
                             <ListItem className={'button'} button data-testid="addbutton" onClick={() => { setOpenPopUp(true); setRecordForEdit(null); setAction('add') }}>
                                 <ListItemIcon>
-                                    <AddBoxIcon />
+                                    <AddBoxIcon style={{fill: "#B22222"}} />
                                 </ListItemIcon>
                                 <ListItemText primary="Add" />
                             </ListItem>
                             <ListItem data-testid="editbutton" button>
                                 <ListItemIcon>
-                                    <EditIcon />
+                                    <EditIcon style={{fill: "#2D3B49"}} />
                                 </ListItemIcon>
                                 <ListItemText primary="Edit" />
                             </ListItem>
                             <ListItem data-testid="deletebutton" button>
                                 <ListItemIcon>
-                                    <DeleteIcon />
+                                    <DeleteIcon style={{fill: "#B22222"}}/>
                                 </ListItemIcon>
                                 <ListItemText primary="Delete" />
                             </ListItem>
@@ -354,10 +355,11 @@ export default function Dashboard() {
                                                         size="small"
                                                         onClick={() => openInPopUp(item)}
                                                     >
-                                                        <EditIcon color="primary" />
+                                                        <EditIcon style={{fill: "#2D3B49"}}/>
                                                     </IconButton>
                                                     <IconButton data-testid="deletebutton"
                                                         size="small"
+                                                        
                                                         onClick={() =>
                                                             setConfirmDialog({
                                                                 isOpen: true,
@@ -367,7 +369,7 @@ export default function Dashboard() {
                                                             })
                                                         }
                                                     >
-                                                        <DeleteIcon color="secondary" />
+                                                        <DeleteIcon style={{fill: "#B22222"}} />
                                                     </IconButton>
                                                 </TableCell>
                                             </TableRow>

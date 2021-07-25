@@ -41,6 +41,10 @@ export default class Register extends React.Component {
         this.setState({ formData });
     }
 
+    handleRedirect = () => {
+        this.props.history.push('/')
+    }
+
     handleSubmit = event => {
         event.preventDefault();
         const user = {
@@ -179,7 +183,7 @@ export default class Register extends React.Component {
 
                         <Typography data-testid="typography" style={signUpStyle}> Already have an account?
 
-                            <Link to={'/'} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
+                            <Link to={'/'} onClick={this.handleRedirect} style={{ color: '#1A73E8', textDecoration: 'inherit' }}>
                                 Sign In
                             </Link>
                         </Typography>

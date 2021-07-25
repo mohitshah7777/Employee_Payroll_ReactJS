@@ -25,7 +25,7 @@ export default function Popup(props){
                         {title}
                     </Typography>
                     <IconButton data-testid="cancelbutton" size="small" onClick={() => setOpenPopUp(false)}>
-                        <CancelIcon  color="secondary"/>
+                        <CancelIcon style={{fill: "#B22222"}}/>
                     </IconButton>
             </div>
             </DialogTitle>

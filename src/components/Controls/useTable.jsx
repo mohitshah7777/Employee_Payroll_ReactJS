@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
         '& thead th' : {
             fontWeight: '600',
             color: "white",
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: "#00AEC3",
         },
         '& tbody td': {
             fontWeight: '400',
