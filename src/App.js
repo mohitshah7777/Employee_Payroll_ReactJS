@@ -3,7 +3,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./components/Dashboard"
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import AddParent from "./components/Form/Employees";
+// import AddParent from "./components/Form/Employees";
 require('dotenv').config();
 
 function App() {
@@ -14,7 +14,6 @@ function App() {
           <Route exact path='/' component={Login} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/register' component={Register} />
-          <Route path='/addparent' component={AddParent} />
         </Switch>
       </BrowserRouter>
     </div>

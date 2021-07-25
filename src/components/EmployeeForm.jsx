@@ -11,9 +11,9 @@ const initialValues = {
     salary: ''
 }
 
-export default function UpdateForm(props) {
+export default function EmployeeForm(props) {
 
-    const { editEmployee, recordForEdit } = props
+    const { addOrEdit, recordForEdit } = props
     const [values, setValues] = useState(initialValues)
 
     const handleChange = (e) => {
@@ -31,7 +31,7 @@ export default function UpdateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values)
-        editEmployee(values, resetForm)
+        addOrEdit(values, resetForm)
         resetForm()
     }
 
@@ -45,7 +45,7 @@ export default function UpdateForm(props) {
     const textStyle = { margin: '5px 0' }
     const btnstyle = { margin: '25px 110px', width: 150 }
     return (
-        <ValidatorForm onSubmit={handleSubmit}>
+        <ValidatorForm data-testid="form" onSubmit={handleSubmit}>
             <TextValidator
                 data-testid="firstname"
                 name='firstName'

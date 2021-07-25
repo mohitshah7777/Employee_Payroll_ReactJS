@@ -1,5 +1,5 @@
 import React from 'react';
-import EmployeeForm from '../components/Form/EmployeeForm'
+import EmployeeForm from '../components/EmployeeForm'
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom'
 

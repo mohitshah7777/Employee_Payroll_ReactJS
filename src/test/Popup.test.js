@@ -1,7 +1,7 @@
 import React from 'react';
 import PopUp from '../components/Popup';
 import { DialogContent } from '@material-ui/core';
-import AddForm from '../components/Form/EmployeeForm';
+import EmployeeForm from '../components/EmployeeForm';
 import Dashboard from '../components/Dashboard';
 import '@testing-library/jest-dom'
 import Enzyme, { shallow } from 'enzyme';
@@ -34,8 +34,8 @@ describe('Test Popup Component', () => {
     
     it('givenPopup_whenOpened_shouldRenderAddForm', () => {
         const wrapper = shallow(<Dashboard />);
-        const addform = wrapper.find(AddForm);
-        expect(addform).toHaveLength(1);
+        const form = wrapper.find(EmployeeForm);
+        expect(form).toHaveLength(1);
         
     })
 })
