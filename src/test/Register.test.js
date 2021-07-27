@@ -16,6 +16,14 @@ describe('Test Register component', () => {
     })
 })
 
+describe('Negative Test Register component', () => {
+    it('givenWrongHeading_whenVisitedLoginPage_shouldNotRenderH3Tag', (done) => {
+        const component = shallow(<Register />)
+        expect(component.find('#h3tag').text()).not.toEqual('EMPLOYEE APP')
+        done()
+    })
+})
+
 describe('Test Form Component', () => {
     it('givenDataTestId_whenVisitedRegisterFormComponent_shouldRenderProperly', (done) => {
         const { getByTestId } = render(<Register />);
@@ -54,6 +62,48 @@ describe('Test Form Component', () => {
         expect(password).toHaveTextContent('Password');
         expect(confirmpassword).toHaveTextContent('Confirm password');
         expect(button).toHaveTextContent('Sign up');
+        done()
+    })
+})
+
+describe('Negative Test Form Component', () => {
+    it('giveWrongnDataTestId_whenVisitedRegisterFormComponent_shouldNotRenderProperly', (done) => {
+        const { queryByTestId } = render(<Register />);
+        const form = queryByTestId('for');
+        const firstname = queryByTestId('irstname');
+        const lastname = queryByTestId('astname');
+        const email = queryByTestId('emil');
+        const password = queryByTestId('assword');
+        const confirmpassword = queryByTestId('cnfirmpassword');
+        const button = queryByTestId('butto')
+        const text = queryByTestId('typogrphy');
+
+        expect(form).not.toBeInTheDocument();
+        expect(firstname).not.toBeInTheDocument();
+        expect(lastname).not.toBeInTheDocument();
+        expect(email).not.toBeInTheDocument();
+        expect(password).not.toBeInTheDocument();
+        expect(confirmpassword).not.toBeInTheDocument();
+        expect(button).not.toBeInTheDocument();
+        expect(text).not.toBeInTheDocument();
+        done()
+    })
+
+    it('givenDataTestId_whenVisitedRegisterFormComponent_shouldNotBeNull', (done) => {
+        const { getByTestId } = render(<Register />);
+        const firstname = getByTestId('firstname');
+        const lastname = getByTestId('lastname');
+        const email = getByTestId('email');
+        const password = getByTestId('password');
+        const confirmpassword = getByTestId('confirmpassword');
+        const button = getByTestId('button')
+
+        expect(firstname).not.toBeNull();
+        expect(lastname).not.toBeNull();
+        expect(email).not.toBeNull();
+        expect(password).not.toBeNull();
+        expect(confirmpassword).not.toBeNull();
+        expect(button).not.toBeNull();
         done()
     })
 })

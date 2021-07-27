@@ -359,7 +359,6 @@ export default function Dashboard() {
                                                     </IconButton>
                                                     <IconButton data-testid="deletebutton"
                                                         size="small"
-                                                        
                                                         onClick={() =>
                                                             setConfirmDialog({
                                                                 isOpen: true,

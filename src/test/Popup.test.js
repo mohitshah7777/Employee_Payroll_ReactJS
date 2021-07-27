@@ -35,7 +35,36 @@ describe('Test Popup Component', () => {
     it('givenPopup_whenOpened_shouldRenderAddForm', () => {
         const wrapper = shallow(<Dashboard />);
         const form = wrapper.find(EmployeeForm);
-        expect(form).toHaveLength(1);
+        expect(form).toHaveLength(1);  
+    })
+})
+
+describe('Negative Test Popup Component', () => {
+    it('givenWrongPopupLength_whenTested_shouldNotBeRendered', () => {
+        const wrapper = shallow(<Dashboard />);
+        const popup = wrapper.find(PopUp);
+        expect(popup).not.toHaveLength(2);
+    })
+    
+    it('givenWrongPopupBooleanValue_whenClicked_shouldNotOpenAndClosePopUp', () => {
+        const wrapper = shallow(<Dashboard />);
+        const isOpenFalse = wrapper.find(PopUp).prop('openPopUp')
+       
+        wrapper.find('.button').first().simulate('click')
+        const isOpenTrue = wrapper.find(PopUp).prop('openPopUp')
         
+        expect(isOpenFalse).not.toBe(true);
+        expect(isOpenTrue).not.toBe(false);
+    })
+
+    it('givenWrongChildrenPopup_whenOpened_shouldNotRenderChildren', () => {
+        const wrapper = shallow(<PopUp>modal content</PopUp>);
+        expect(wrapper.find(DialogContent).prop('children')).not.toBe('modal conten');
+    })
+    
+    it('givenWrongPopupLength_whenOpened_shouldNotRenderAddForm', () => {
+        const wrapper = shallow(<Dashboard />);
+        const form = wrapper.find(EmployeeForm);
+        expect(form).not.toHaveLength(2);  
     })
 })
