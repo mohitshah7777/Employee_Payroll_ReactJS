@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -146,7 +145,7 @@ export default function Dashboard() {
     // const [records1, setRecords1] = React.useState(0)
     const [action, setAction] = React.useState(null)
     const [openPopUp, setOpenPopUp] = React.useState(false);
-    const [openPopUpAdd, setOpenPopUpAdd] = React.useState(false);
+    // const [openPopUpAdd, setOpenPopUpAdd] = React.useState(false);
     const [notify, setNotify] = React.useState({ isOpen: false, message: '', type: '' })
     const history = useHistory();
 
