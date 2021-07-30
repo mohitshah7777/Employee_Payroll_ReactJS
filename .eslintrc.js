@@ -23,6 +23,5 @@ module.exports = {
     "rules": {
         "react/prop-types": "off",
         "no-unused-vars": ["error", { "vars": "local", "args": "none", "ignoreRestSiblings": true }],
-        
     },
 };
