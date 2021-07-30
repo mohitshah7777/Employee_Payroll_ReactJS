@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-cd /home/ubuntu/EmpPayroll_FrontEnd
+cd /home/ubuntu/EmployeePayroll_Frontend
 directory=$(pwd)
 echo "Directory is $directory"
 npm i
