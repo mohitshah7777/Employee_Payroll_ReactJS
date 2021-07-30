@@ -110,6 +110,7 @@ export default class Register extends React.Component {
                             placeholder='Enter first name'
                             variant='outlined'
                             fullWidth
+                            autoComplete='off'
                         />
                         <TextValidator
                             data-testid="lastname"
@@ -124,6 +125,7 @@ export default class Register extends React.Component {
                             value={formData.lastName}
                             validators={['required', 'matchRegexp:^[a-zA-Z]{2,}']}
                             errorMessages={["this field is required", "Minimum 2 characters"]}
+                            autoComplete='off'
                         />
                         <TextValidator
                             data-testid="email"
@@ -138,6 +140,7 @@ export default class Register extends React.Component {
                             value={formData.email}
                             validators={['required', 'isEmail']}
                             errorMessages={["this field is required", "Email is not valid",]}
+                            autoComplete='off'
                         />
                         <TextValidator
                             data-testid="password"
@@ -151,6 +154,7 @@ export default class Register extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                             value={formData.password}
+                            autoComplete='off'
                             validators={['required', 'matchRegexp:^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{7,15}$']}
                             errorMessages={["this field is required", "Password must contain atleast 1 uppercase, 1 lowercase, 1 special character, 8 characters"]}
                         />
@@ -166,6 +170,7 @@ export default class Register extends React.Component {
                             fullWidth
                             onChange={this.handleChange}
                             value={formData.confirmPassword}
+                            autoComplete='off'
                             validators={['isPasswordMatch', 'required']}
                             errorMessages={['password mismatch', 'this field is required']}
                         />
