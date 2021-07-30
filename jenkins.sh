@@ -7,3 +7,4 @@ npm i
 # npm install @babel/core@babel/preset-env
 npm build
 npm start
+echo "Successfully Deployed"
