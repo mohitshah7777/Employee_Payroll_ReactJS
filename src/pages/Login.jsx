@@ -86,6 +86,7 @@ export default class Login extends React.Component {
                             variant='outlined'
                             name='email'
                             fullWidth
+                            autoComplete='off'
                             onChange={this.handleChange}
                             value={formData.email}
                             validators={['required', 'isEmail']}
@@ -101,6 +102,7 @@ export default class Login extends React.Component {
                             variant='outlined'
                             name='password'
                             fullWidth
+                            autoComplete='off'
                             onChange={this.handleChange}
                             value={formData.password}
                             validators={['required']}
