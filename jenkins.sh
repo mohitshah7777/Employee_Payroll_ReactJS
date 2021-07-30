@@ -5,6 +5,11 @@ directory=$(pwd)
 echo "Directory is $directory"
 npm i
 # npm install @babel/core@babel/preset-env
+<<<<<<< HEAD
 npm run build
 npm start
 echo "Successfully Deployed"
+=======
+npm build
+npm start
+>>>>>>> parent of 3bfd35d (refactor: jenkins.sh file)
