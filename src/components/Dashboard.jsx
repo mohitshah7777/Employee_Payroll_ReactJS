@@ -165,10 +165,6 @@ export default function Dashboard() {
         history.push('/');
     }
 
-    const handleList = () => {
-        getAllemployees()
-    }
-
     useEffect(() => {
         getAllemployees()
     }, [setRecords])
@@ -312,7 +308,7 @@ export default function Dashboard() {
                         </div>
                         <Divider />
                         <List>
-                            <ListItem data-testid="listbutton" button component={Link} to={'/dashboard'} onClick={handleList}>
+                            <ListItem data-testid="listbutton" button component={Link} to={'/dashboard'}>
                                 <ListItemIcon>
                                     <ViewListIcon style={{fill: "#2D3B49"}} />
                                 </ListItemIcon>
