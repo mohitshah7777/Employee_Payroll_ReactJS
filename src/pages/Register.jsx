@@ -76,6 +76,7 @@ export default class Register extends React.Component {
                 confirmPassword: ''
             }
         })
+        this.props.history.push('/')
     }
 
     render() {
