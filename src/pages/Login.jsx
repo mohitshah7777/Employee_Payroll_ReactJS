@@ -38,9 +38,9 @@ export default class Login extends React.Component {
         service.loginAxios(user)
             .then((res) => {
                 if(res.data.success === true){
-                    this.props.history.push('/dashboard');
                     alert(res.data.message)
                     localStorage.setItem('token', res.data.token)
+                    this.props.history.push('/dashboard');
                 }
             }).catch((error) => {
                 alert("Invalid Credentials")
